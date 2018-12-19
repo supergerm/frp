@@ -304,8 +304,8 @@ func (cfg *DomainConf) checkForSvr() (err error) {
 	}
 
 	for _, domain := range cfg.CustomDomains {
-		if subDomainHost != "" && len(strings.Split(subDomainHost, ".")) < len(strings.Split(domain, ".")) {
-			if strings.Contains(domain, subDomainHost) {
+		if subDomainHost != "" && len(strings.Split(subDomainHost, ".")) > len(strings.Split(domain, ".")) {
+			if !strings.Contains(domain, subDomainHost) {
 				return fmt.Errorf("custom domain [%s] should not belong to subdomain_host [%s]", domain, subDomainHost)
 			}
 		}
